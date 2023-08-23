@@ -33,6 +33,6 @@ class Vec2d {
      * @returns {number}
      */
     getY() {
-        return this.#_x;
+        return this.#_y;
     }
 }
