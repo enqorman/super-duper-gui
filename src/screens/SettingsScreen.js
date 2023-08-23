@@ -4,7 +4,7 @@ class SettingsScreen extends Screen {
      */
     constructor(parent = null) {
         super(parent);
-        this.addWidget(new Button(new Vec2d((canvas.width / 2) - (120 / 2), 120), new Rectangle(120, 40), "back!", () => this.back()));
+        this.addWidget(new Button(new Vec2d((canvas.width / 2) - (120 / 2), (canvas.height / 2) + (40 * 2)), new Rectangle(120, 40), "back!", () => this.back()));
     }
     
     render() {
