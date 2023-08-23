@@ -52,8 +52,11 @@ function main() {
 
     window.addEventListener("keydown", (ev) => {
         ev.preventDefault();
+        const keyCode = ev.keyCode;
+        if (keyCode == 122) 
+            canvas.requestFullscreen();
         if (currentScreen && currentScreen.onKeyDown instanceof Function)
-            currentScreen.onKeyDown(ev.keyCode);
+            currentScreen.onKeyDown(keyCode);
     });
 
     window.addEventListener("keyup", (ev) => {
@@ -69,14 +72,21 @@ function main() {
 let currentScreen;
 const { width: canvasWidth, height: canvasHeight } = canvas;
 function render() {
+    canvas.width = window.innerWidth - 4;
+    canvas.height = window.innerHeight - 4;
+
     context.fillStyle = "black";
     context.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    if (currentScreen) {
-        currentScreen.render();
-        currentScreen.update();
-    } else {
-        currentScreen = new MainScreen();
+    try {
+        if (currentScreen) {
+            currentScreen.render();
+            currentScreen.update();
+        } else {
+            currentScreen = new MainScreen();
+        }
+    } catch(exception) {
+        console.log('Screen failed to load.');
     }
 
     requestAnimationFrame(render);
